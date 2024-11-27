@@ -1,4 +1,4 @@
-type Role = 'admin' | 'editor' | 'author' | 'user';
+// type Role = 'admin' | 'editor' | 'author' | 'user';
 
 interface Permission {
   id: string;
@@ -6,6 +6,12 @@ interface Permission {
   resource: 'Post' | 'User' | 'Comment' | 'Tag';
 }
 
+interface Role {
+  id: string;
+  name: string;
+  description: string;
+  permissions: string[];
+}
 
 // export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
 //   admin: [

@@ -1,12 +1,20 @@
 import { ReactNode } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { usePermissions } from '../hooks/userPermission';
 
 export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { user, logout } = useAuth()!;
   const { hasRole } = usePermissions();
+  const navigate = useNavigate();
 
+  const userLogout = () => {
+    logout();
+    if(window.location.pathname !== "/") {
+      navigate("/");
+    }
+  }
+  
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <nav className="bg-white shadow-md dark:bg-gray-800">
@@ -32,7 +40,7 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
                     </Link>
                   )}
                   <button
-                    onClick={logout}
+                    onClick={userLogout}
                     className="text-gray-600 dark:text-gray-400 dark:hover:text-white hover:text-gray-800"
                   >
                     Logout

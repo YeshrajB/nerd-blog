@@ -18,7 +18,7 @@ export const UserModal: React.FC<UserModalProps> = ({ user, onClose, onSave }) =
       isActive: user.isActive,
     });
   
-    const availableRoles: Role[] = ['admin', 'editor', 'author', 'user'];
+    const availableRoles: string[] = ['admin', 'editor', 'author', 'user'];
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { name, value } = e.target;

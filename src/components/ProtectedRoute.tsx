@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
     action: Permission['action'];
     resource: Permission['resource'];
   }[];
-  requiredRoles?: Role[];
+  requiredRoles?: string[];
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({

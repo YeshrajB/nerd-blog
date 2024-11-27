@@ -2,16 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "../../api/axiosConfig";
 
 export const RoleManagement: React.FC = () => {
-    const [roles, setRoles] = useState<{
-      name: Role;
-      description: string;
-    }[]>([]);
+    const [roles, setRoles] = useState<Role[]>([]);
   
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentRole, setCurrentRole] = useState<{
-      name: Role;
-      description: string;
-    } | null>(null);
+    const [currentRole, setCurrentRole] = useState<Role | null>(null);
 
     useEffect(() => {
         const fetchRoles = async () => {
@@ -31,12 +25,12 @@ export const RoleManagement: React.FC = () => {
       setIsModalOpen(true);
     };
   
-    const handleEditRole = (role: { name: Role; description: string }) => {
+    const handleEditRole = (role: Role) => {
       setCurrentRole(role);
       setIsModalOpen(true);
     };
   
-    const handleSaveRole = (roleData: { name: Role; description: string }) => {
+    const handleSaveRole = (roleData: Role) => {
       if (currentRole) {
         // Update existing role
         setRoles(roles.map(r => r.name === currentRole.name ? roleData : r));
@@ -47,7 +41,7 @@ export const RoleManagement: React.FC = () => {
       setIsModalOpen(false);
     };
   
-    const handleDeleteRole = (roleName: Role) => {
+    const handleDeleteRole = (roleName: string) => {
       setRoles(roles.filter(r => r.name !== roleName));
     };
   
@@ -68,6 +62,7 @@ export const RoleManagement: React.FC = () => {
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permissions</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
@@ -76,6 +71,7 @@ export const RoleManagement: React.FC = () => {
                 <tr key={role.name}>
                   <td className="px-6 py-4 whitespace-nowrap dark:text-white">{role.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap dark:text-white">{role.description}</td>
+                  <td className="px-6 py-4 whitespace-nowrap dark:text-white">{role.permissions.length}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
                       {/* <button 

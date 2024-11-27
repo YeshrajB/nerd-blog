@@ -1,6 +1,6 @@
 import { useAuth } from '../contexts/AuthContext';
 
-const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
+const ROLE_PERMISSIONS: Record<string, Permission[]> = {
     admin: [
       { id: 'create', action: 'Create', resource: 'Post' },
       { id: 'view', action: 'View', resource: 'Post' },
@@ -66,7 +66,7 @@ export const usePermissions = () => {
     );
   };
 
-  const hasRole = (role: Role) => {
+  const hasRole = (role: string) => {
     return user?.role === role || false;
   };
 
